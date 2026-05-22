@@ -1,0 +1,34 @@
+baseURL = "https://jackmonte.com"
+title = "Jack Monte — AI Engineer"
+theme = "PaperMod"
+locale = 'en-us'
+paginate = 10
+
+[params]
+  author = "Jack Monte"
+  description = "AI engineer building RAG pipelines and LLM-powered tools."
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+
+[params.profileMode]
+  enabled = true
+  title = "Jack Monte"
+  subtitle = "AI engineer. Building RAG pipelines and LLM-powered tools."
+  imageUrl = ""
+  imageTitle = ""
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/digitalrower"
+
+[[params.socialIcons]]
+  name = "linkedin"
+  url = "https://linkedin.com/in/yourprofile"
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 1
