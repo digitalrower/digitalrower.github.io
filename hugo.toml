@@ -3,6 +3,7 @@ title = "Jack Monte — AI Engineer"
 theme = "PaperMod"
 locale = 'en-us'
 paginate = 10
+enableRobotsTXT = true
 
 [params]
   author = "Jack Monte"
