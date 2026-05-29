@@ -2,6 +2,19 @@
 title: "I Built an Eval Harness for My RAG Pipeline. Here's What the Numbers Revealed."
 date: 2026-05-21
 draft: false
+author: "Jack Monte"
+description: "Most RAG pipelines ship without a systematic way to measure whether they work. I built an eval harness with 40 golden questions and three scorers. The numbers gave a precise diagnosis: generation is solved, retrieval is not."
+summary: "An automated eval harness with 40 golden questions and three scorers turned 'looks reasonable' into a precise diagnosis of where my RAG pipeline actually breaks."
+tags: ["LLM", "Evals", "RAG", "Retrieval", "Python", "LLM-as-judge"]
+categories: ["Engineering"]
+cover:
+  image: "images/w5e-eval-harness-cover.png"
+  alt: "I built an eval harness for my RAG pipeline: 40 questions, 3 scorers, and the one number that told me where it breaks"
+  caption: "Evaluating a RAG pipeline with an automated harness"
+  relative: false
+images: ["images/w5e-eval-harness-cover.png"]
+ShowToc: true
+TocOpen: false
 ---
 
 Most RAG pipelines ship without any systematic way to measure whether they're actually working. You run a few manual queries, the answers look reasonable, and you move on. The problem is that "looks reasonable" doesn't tell you where the system is failing, how often it fails, or whether it would fail on the queries your users actually send.
@@ -32,6 +45,10 @@ The harness has three components: a dataset of 40 golden question-answer pairs, 
 - *Answer relevance* measures whether the answer actually addresses the question asked. A relevance failure means the system retrieved something and Claude generated something, but the output doesn't help the user. Also scored 1-5.
 - *Precision@3* measures whether the top-3 retrieved chunks contain enough information to answer the question. This is a retrieval-only metric that tells you if the problem is upstream of generation entirely. Scored 0 or 1.
 
+The three metrics deliberately probe different stages of the pipeline, so when a score drops you know exactly which stage to look at:
+
+![Diagram showing the RAG pipeline (question to chunks to answer) with Precision@3 measuring question-to-chunks, Faithfulness measuring chunks-to-answer, and Answer Relevance measuring question-to-answer](/images/w5e-eval-metrics-diagram.svg)
+
 Using Claude Haiku as judge keeps scoring costs low (fractions of a cent per query) while producing consistent, reasoning-backed scores. Temperature 0 means running the same dataset twice produces the same results.
 
 **The runner** loops through the dataset, calls the live pipeline for each question, scores the output with all three scorers, and writes a structured results file. Running the full eval takes a few minutes and produces a summary table.
@@ -47,6 +64,10 @@ Using Claude Haiku as judge keeps scoring costs low (fractions of a cent per que
 | adversarial | 5.00 | 5.00 | 0.00 | 4 |
 | bias_paired | 5.00 | 3.40 | 0.60 | 10 |
 | **OVERALL** | **4.95** | **3.55** | **0.53** | **40** |
+
+Plotted on one normalized axis, the pattern is hard to miss:
+
+![Grouped bar chart of faithfulness, relevance, and precision@3 by category, normalized to 0 to 1. Faithfulness stays near the top across all four categories while precision@3 drops to 0.30 on edge cases and 0.00 on adversarial queries](/images/w5e-eval-results-chart.svg)
 
 The headline number is faithfulness at 4.95 out of 5. Claude is not hallucinating. When the pipeline retrieves chunks, the generated answers stay within that context. That's the grounding constraint working as designed.
 

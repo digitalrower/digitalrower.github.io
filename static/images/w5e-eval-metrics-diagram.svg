@@ -1,0 +1,56 @@
+<svg width="900" height="430" viewBox="0 0 900 430" xmlns="http://www.w3.org/2000/svg" font-family="DejaVu Sans">
+  <rect width="900" height="430" fill="#0b0f1e" rx="12"/>
+  <text x="40" y="46" font-size="20" font-weight="bold" fill="#e6e9f5">What each scorer measures</text>
+  <text x="40" y="70" font-size="13" fill="#8a93b8">Three metrics, three different failure modes, three different fixes.</text>
+
+  <!-- pipeline row -->
+  <g>
+    <!-- Question -->
+    <rect x="40" y="100" width="150" height="56" rx="8" fill="#161a2e" stroke="#2a3150"/>
+    <text x="115" y="126" font-size="15" font-weight="bold" fill="#e6e9f5" text-anchor="middle">Question</text>
+    <text x="115" y="145" font-size="11" fill="#8a93b8" text-anchor="middle">user query</text>
+
+    <!-- arrow -->
+    <line x1="196" y1="128" x2="244" y2="128" stroke="#3a4karen" stroke-width="2"/>
+    <line x1="196" y1="128" x2="244" y2="128" stroke="#3a4166" stroke-width="2"/>
+    <polygon points="244,123 254,128 244,133" fill="#3a4166"/>
+
+    <!-- Chunks -->
+    <rect x="260" y="100" width="170" height="56" rx="8" fill="#161a2e" stroke="#2a3150"/>
+    <text x="345" y="126" font-size="15" font-weight="bold" fill="#e6e9f5" text-anchor="middle">Top-3 chunks</text>
+    <text x="345" y="145" font-size="11" fill="#8a93b8" text-anchor="middle">vector retrieval</text>
+
+    <line x1="436" y1="128" x2="484" y2="128" stroke="#3a4166" stroke-width="2"/>
+    <polygon points="484,123 494,128 484,133" fill="#3a4166"/>
+
+    <!-- Generation -->
+    <rect x="500" y="100" width="170" height="56" rx="8" fill="#161a2e" stroke="#2a3150"/>
+    <text x="585" y="126" font-size="15" font-weight="bold" fill="#e6e9f5" text-anchor="middle">Answer</text>
+    <text x="585" y="145" font-size="11" fill="#8a93b8" text-anchor="middle">Claude generation</text>
+  </g>
+
+  <!-- measurement bands -->
+  <!-- Precision@3: Question <-> Chunks -->
+  <g>
+    <path d="M115,168 L115,196 L345,196 L345,168" fill="none" stroke="#818cf8" stroke-width="2"/>
+    <rect x="150" y="206" width="160" height="44" rx="6" fill="#15193660" stroke="#6366f1"/>
+    <text x="160" y="226" font-size="13" font-weight="bold" fill="#a5b4fc">Precision@3 (0/1)</text>
+    <text x="160" y="243" font-size="11" fill="#8a93b8">Do the chunks contain the answer?</text>
+  </g>
+
+  <!-- Faithfulness: Chunks <-> Answer -->
+  <g>
+    <path d="M345,260 L345,288 L585,288 L585,168" fill="none" stroke="#34d399" stroke-width="2"/>
+    <rect x="370" y="298" width="190" height="44" rx="6" fill="#10241c80" stroke="#34d399"/>
+    <text x="380" y="318" font-size="13" font-weight="bold" fill="#6ee7b7">Faithfulness (1-5)</text>
+    <text x="380" y="335" font-size="11" fill="#8a93b8">Does the answer stay in context?</text>
+  </g>
+
+  <!-- Relevance: Question <-> Answer (widest) -->
+  <g>
+    <path d="M115,250 L115,360 L585,360 L585,298" fill="none" stroke="#f0abfc" stroke-width="2"/>
+    <rect x="180" y="368" width="240" height="44" rx="6" fill="#2a103080" stroke="#c084fc"/>
+    <text x="190" y="388" font-size="13" font-weight="bold" fill="#e9d5ff">Answer Relevance (1-5)</text>
+    <text x="190" y="405" font-size="11" fill="#8a93b8">Does the answer address the question?</text>
+  </g>
+</svg>
