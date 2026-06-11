@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 460" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#64748B"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1180" height="460" rx="14" fill="#0F172A"/>
+  <text x="44" y="52" fill="#F1F5F9" font-size="22" font-weight="700">Why 13 of 40 eval items silently failed</text>
+  <text x="44" y="78" fill="#64748B" font-size="14">the judge was asked for JSON; sometimes it answered in prose first</text>
+
+  <!-- the judge output -->
+  <rect x="44" y="116" width="560" height="300" rx="10" fill="#161E2E" stroke="#334155"/>
+  <text x="68" y="148" fill="#94A3B8" font-size="12.5" letter-spacing="1">WHAT THE JUDGE RETURNED</text>
+  <g font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13.5">
+    <text x="68" y="186" fill="#F87171">I need to evaluate whether the</text>
+    <text x="68" y="208" fill="#F87171">retrieved chunks contain enough</text>
+    <text x="68" y="230" fill="#F87171">information to answer...</text>
+    <text x="68" y="266" fill="#64748B">{</text>
+    <text x="88" y="288" fill="#94A3B8">"reasoning": "...",</text>
+    <text x="88" y="310" fill="#94A3B8">"score": 1</text>
+    <text x="68" y="332" fill="#64748B">}</text>
+  </g>
+  <rect x="60" y="170" width="430" height="74" rx="6" fill="none" stroke="#F87171" stroke-dasharray="5 4"/>
+  <text x="68" y="372" fill="#F87171" font-size="12.5">model_validate_json() chokes at character 1:</text>
+  <text x="68" y="392" fill="#F87171" font-size="12.5" font-family="ui-monospace,Menlo,monospace">"expected ident at line 1 column 2"</text>
+
+  <!-- arrow -->
+  <line x1="624" y1="266" x2="688" y2="266" stroke="#64748B" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- the fix -->
+  <rect x="708" y="116" width="428" height="300" rx="10" fill="#13211C" stroke="#1F3D31"/>
+  <text x="732" y="148" fill="#34D399" font-size="12.5" letter-spacing="1">THE FIX: CONSTRAINED DECODING</text>
+  <g font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13" fill="#CBD5E1">
+    <text x="732" y="190">client.messages.parse(</text>
+    <text x="752" y="212" fill="#94A3B8">...,</text>
+    <text x="752" y="234" fill="#6EE7B7">output_format=ScoreResult,</text>
+    <text x="732" y="256">)</text>
+  </g>
+  <text x="732" y="300" fill="#94A3B8" font-size="12.5">The schema is enforced at decode time.</text>
+  <text x="732" y="322" fill="#94A3B8" font-size="12.5">Schema-valid JSON is the only output the</text>
+  <text x="732" y="344" fill="#94A3B8" font-size="12.5">model can produce. No preamble is possible.</text>
+  <text x="732" y="384" fill="#34D399" font-size="13" font-weight="600">Parse failures after the change: 0 of 40.</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 520" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1180" height="520" rx="14" fill="#0F172A"/>
+  <text x="44" y="52" fill="#F1F5F9" font-size="22" font-weight="700">From untyped dicts to validated boundaries</text>
+
+  <!-- BEFORE panel -->
+  <rect x="44" y="84" width="528" height="392" rx="10" fill="#161E2E" stroke="#3F2A2A"/>
+  <text x="68" y="116" fill="#F87171" font-size="13" font-weight="700" letter-spacing="1">BEFORE</text>
+  <text x="68" y="136" fill="#64748B" font-size="12">a bag of strings, no validation, subscript access</text>
+  <g font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13" fill="#CBD5E1">
+    <text x="68" y="176">def retrieve_chunks(...) -&gt;</text>
+    <text x="320" y="176" fill="#F87171">list[dict[str, str]]:</text>
+    <text x="88" y="200">chunks.append(</text>
+    <text x="108" y="222" fill="#94A3B8">{"text": doc, "source": meta...}</text>
+    <text x="88" y="244">)</text>
+    <text x="68" y="288" fill="#64748B">#  ...several layers later</text>
+    <text x="68" y="312">def build_prompt(chunks):</text>
+    <text x="88" y="336">for item in chunks:</text>
+    <text x="108" y="360" fill="#F87171">item["text"]</text>
+    <text x="240" y="360" fill="#64748B"># KeyError at runtime,</text>
+    <text x="108" y="380" fill="#64748B"># typos pass silently</text>
+  </g>
+  <text x="68" y="440" fill="#94A3B8" font-size="12.5">A wrong key fails far from where the data</text>
+  <text x="68" y="458" fill="#94A3B8" font-size="12.5">entered, if it fails at all.</text>
+
+  <!-- arrow -->
+  <text x="600" y="290" fill="#475569" font-size="34">&#8594;</text>
+
+  <!-- AFTER panel -->
+  <rect x="652" y="84" width="484" height="392" rx="10" fill="#13211C" stroke="#1F3D31"/>
+  <text x="676" y="116" fill="#34D399" font-size="13" font-weight="700" letter-spacing="1">AFTER</text>
+  <text x="676" y="136" fill="#64748B" font-size="12">a model, validation at the edge, attribute access</text>
+  <g font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13" fill="#CBD5E1">
+    <text x="676" y="176">class Chunk(BaseModel):</text>
+    <text x="696" y="198" fill="#6EE7B7">model_config = ...extra="forbid"</text>
+    <text x="696" y="220">text: str</text>
+    <text x="696" y="242">source: str</text>
+    <text x="676" y="288">def retrieve_chunks(...) -&gt;</text>
+    <text x="676" y="310" fill="#34D399">    list[Chunk]:</text>
+    <text x="696" y="334">chunks.append(</text>
+    <text x="716" y="356" fill="#6EE7B7">Chunk(text=doc, source=...)</text>
+    <text x="696" y="378">)</text>
+  </g>
+  <text x="676" y="440" fill="#94A3B8" font-size="12.5">An unexpected shape fails loudly at the</text>
+  <text x="676" y="458" fill="#94A3B8" font-size="12.5">boundary; item.text is checked, not hoped.</text>
+</svg>

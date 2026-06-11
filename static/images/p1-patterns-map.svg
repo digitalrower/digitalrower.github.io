@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 600" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#64748B"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1180" height="600" rx="14" fill="#0F172A"/>
+  <text x="44" y="54" fill="#F1F5F9" font-size="24" font-weight="700">Four patterns, read out of a production SDK</text>
+  <text x="44" y="80" fill="#64748B" font-size="14">where each one landed in rag-starter</text>
+
+  <!-- modules row: query path -->
+  <g>
+    <rect x="44" y="132" width="180" height="78" rx="9" fill="#1E293B" stroke="#334155"/>
+    <text x="64" y="162" fill="#E2E8F0" font-size="14" font-weight="600">query.py</text>
+    <text x="64" y="184" fill="#94A3B8" font-size="11.5">retrieve, build prompt,</text>
+    <text x="64" y="199" fill="#94A3B8" font-size="11.5">generate</text>
+  </g>
+  <g>
+    <rect x="264" y="132" width="180" height="78" rx="9" fill="#1E293B" stroke="#334155"/>
+    <text x="284" y="162" fill="#E2E8F0" font-size="14" font-weight="600">scorer.py</text>
+    <text x="284" y="184" fill="#94A3B8" font-size="11.5">three LLM-as-judge</text>
+    <text x="284" y="199" fill="#94A3B8" font-size="11.5">scorers</text>
+  </g>
+  <g>
+    <rect x="484" y="132" width="180" height="78" rx="9" fill="#1E293B" stroke="#334155"/>
+    <text x="504" y="162" fill="#E2E8F0" font-size="14" font-weight="600">runner.py</text>
+    <text x="504" y="184" fill="#94A3B8" font-size="11.5">eval orchestration,</text>
+    <text x="504" y="199" fill="#94A3B8" font-size="11.5">per-item isolation</text>
+  </g>
+  <g>
+    <rect x="704" y="132" width="180" height="78" rx="9" fill="#1E293B" stroke="#334155"/>
+    <text x="724" y="162" fill="#E2E8F0" font-size="14" font-weight="600">ingest.py</text>
+    <text x="724" y="184" fill="#94A3B8" font-size="11.5">chunk, embed,</text>
+    <text x="724" y="199" fill="#94A3B8" font-size="11.5">store</text>
+  </g>
+  <g>
+    <rect x="924" y="132" width="212" height="78" rx="9" fill="#152238" stroke="#475569"/>
+    <text x="944" y="162" fill="#E2E8F0" font-size="14" font-weight="600">new modules</text>
+    <text x="944" y="184" fill="#94A3B8" font-size="11.5" font-family="ui-monospace,Menlo,monospace">client.py  models.py</text>
+    <text x="944" y="199" fill="#94A3B8" font-size="11.5" font-family="ui-monospace,Menlo,monospace">errors.py</text>
+  </g>
+
+  <!-- pattern bands -->
+  <!-- P1 client factory -->
+  <g>
+    <rect x="44" y="262" width="1092" height="62" rx="9" fill="#0c1a2b" stroke="#38BDF8" stroke-opacity="0.5"/>
+    <circle cx="78" cy="293" r="14" fill="#0F172A" stroke="#38BDF8"/>
+    <text x="78" y="298" fill="#7DD3FC" font-size="13" font-weight="700" text-anchor="middle">1</text>
+    <text x="110" y="288" fill="#E2E8F0" font-size="14.5" font-weight="600">Centralized client factory</text>
+    <text x="110" y="308" fill="#94A3B8" font-size="12.5">four inline Anthropic() calls become one configured get_anthropic_client(). The SDK already does backoff; this is configure-and-centralize.</text>
+  </g>
+  <!-- P2 typed boundaries -->
+  <g>
+    <rect x="44" y="334" width="1092" height="62" rx="9" fill="#0c1a2b" stroke="#A5B4FC" stroke-opacity="0.5"/>
+    <circle cx="78" cy="365" r="14" fill="#0F172A" stroke="#A5B4FC"/>
+    <text x="78" y="370" fill="#C7D2FE" font-size="13" font-weight="700" text-anchor="middle">2</text>
+    <text x="110" y="360" fill="#E2E8F0" font-size="14.5" font-weight="600">Typed Pydantic boundaries</text>
+    <text x="110" y="380" fill="#94A3B8" font-size="12.5">dicts and TypedDicts at layer boundaries become validated models (extra="forbid"). Chunk, QueryResponse, ScoreResult, EvalItem, EvalResult.</text>
+  </g>
+  <!-- P3 error hierarchy -->
+  <g>
+    <rect x="44" y="406" width="1092" height="62" rx="9" fill="#0c1a2b" stroke="#FBBF24" stroke-opacity="0.5"/>
+    <circle cx="78" cy="437" r="14" fill="#0F172A" stroke="#FBBF24"/>
+    <text x="78" y="442" fill="#FCD34D" font-size="13" font-weight="700" text-anchor="middle">3</text>
+    <text x="110" y="432" fill="#E2E8F0" font-size="14.5" font-weight="600">Typed error hierarchy</text>
+    <text x="110" y="452" fill="#94A3B8" font-size="12.5">a RAGError base plus categorical subclasses; failures raise instead of masquerading as answers, and the runner isolates one bad item from the run.</text>
+  </g>
+  <!-- P4 structured outputs -->
+  <g>
+    <rect x="44" y="478" width="1092" height="62" rx="9" fill="#0c1a2b" stroke="#34D399" stroke-opacity="0.5"/>
+    <circle cx="78" cy="509" r="14" fill="#0F172A" stroke="#34D399"/>
+    <text x="78" y="514" fill="#6EE7B7" font-size="13" font-weight="700" text-anchor="middle">4</text>
+    <text x="110" y="504" fill="#E2E8F0" font-size="14.5" font-weight="600">Structured outputs for the judge</text>
+    <text x="110" y="524" fill="#94A3B8" font-size="12.5">scorers move to messages.parse(output_format=...); constrained decoding makes schema-valid JSON the only legal output. (The story of post 2.)</text>
+  </g>
+
+  <!-- connective ticks from modules to bands -->
+  <line x1="134" y1="210" x2="134" y2="262" stroke="#334155" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="354" y1="210" x2="354" y2="262" stroke="#334155" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="574" y1="210" x2="574" y2="262" stroke="#334155" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="1030" y1="210" x2="1030" y2="262" stroke="#334155" stroke-width="1.5" marker-end="url(#a1)"/>
+</svg>

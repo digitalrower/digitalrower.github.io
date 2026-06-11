@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 420" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1180" height="420" rx="14" fill="#0F172A"/>
+  <text x="44" y="52" fill="#F1F5F9" font-size="22" font-weight="700">The pattern was configure-and-centralize, not build-a-loop</text>
+  <text x="44" y="78" fill="#64748B" font-size="14">reading the SDK source showed the hard part was already done</text>
+
+  <!-- what I almost built -->
+  <rect x="44" y="112" width="528" height="260" rx="10" fill="#161E2E" stroke="#3F2A2A"/>
+  <text x="68" y="144" fill="#F87171" font-size="13" font-weight="700" letter-spacing="1">WHAT I ALMOST BUILT</text>
+  <g fill="#94A3B8" font-size="13.5">
+    <text x="68" y="180">a retry loop with exponential backoff</text>
+    <text x="68" y="206">jitter calculation</text>
+    <text x="68" y="232">Retry-After header parsing</text>
+    <text x="68" y="258">which status codes are retryable</text>
+    <text x="68" y="284">a max-attempts ceiling</text>
+  </g>
+  <text x="68" y="332" fill="#F87171" font-size="13">All of it already lives in the SDK's</text>
+  <text x="68" y="352" fill="#F87171" font-size="13">_base_client.py.</text>
+
+  <!-- what I actually wrote -->
+  <rect x="652" y="112" width="484" height="260" rx="10" fill="#13211C" stroke="#1F3D31"/>
+  <text x="676" y="144" fill="#34D399" font-size="13" font-weight="700" letter-spacing="1">WHAT I ACTUALLY WROTE</text>
+  <g font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="13" fill="#CBD5E1">
+    <text x="676" y="182">DEFAULT_TIMEOUT = httpx.Timeout(</text>
+    <text x="696" y="202" fill="#94A3B8">timeout=30.0, connect=5.0)</text>
+    <text x="676" y="226">DEFAULT_MAX_RETRIES = 4</text>
+    <text x="676" y="264">def get_anthropic_client(...):</text>
+    <text x="696" y="288" fill="#6EE7B7">return Anthropic(</text>
+    <text x="716" y="310" fill="#6EE7B7">timeout=..., max_retries=...)</text>
+  </g>
+  <text x="676" y="352" fill="#34D399" font-size="13">One configured construction seam.</text>
+</svg>

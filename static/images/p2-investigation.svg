@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 440" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1180" height="440" rx="14" fill="#0F172A"/>
+  <text x="44" y="52" fill="#F1F5F9" font-size="22" font-weight="700">The investigation, step by step</text>
+  <text x="44" y="78" fill="#64748B" font-size="14">two real bugs, found one after the other, because the eval was read and not just run</text>
+
+  <!-- vertical spine -->
+  <line x1="80" y1="120" x2="80" y2="400" stroke="#334155" stroke-width="2"/>
+
+  <!-- step template -->
+  <!-- 1 -->
+  <circle cx="80" cy="138" r="9" fill="#0F172A" stroke="#A5B4FC" stroke-width="2"/>
+  <text x="112" y="134" fill="#E2E8F0" font-size="14.5" font-weight="600">Typed boundary added to the parse</text>
+  <text x="112" y="154" fill="#94A3B8" font-size="12.5">model_validate_json replaces a hand-rolled json.loads. Strictness is the point.</text>
+
+  <!-- 2 -->
+  <circle cx="80" cy="190" r="9" fill="#0F172A" stroke="#F87171" stroke-width="2"/>
+  <text x="112" y="186" fill="#E2E8F0" font-size="14.5" font-weight="600">13 of 40 items error</text>
+  <text x="112" y="206" fill="#94A3B8" font-size="12.5">The strict parser surfaces what the old code hid: the judge sometimes preambles in prose.</text>
+
+  <!-- 3 -->
+  <circle cx="80" cy="242" r="9" fill="#0F172A" stroke="#34D399" stroke-width="2"/>
+  <text x="112" y="238" fill="#E2E8F0" font-size="14.5" font-weight="600">Structured outputs fixes reliability</text>
+  <text x="112" y="258" fill="#94A3B8" font-size="12.5">messages.parse with a schema. Parse failures drop from 13 to 0.</text>
+
+  <!-- 4 -->
+  <circle cx="80" cy="294" r="9" fill="#0F172A" stroke="#FBBF24" stroke-width="2"/>
+  <text x="112" y="290" fill="#E2E8F0" font-size="14.5" font-weight="600">Re-baseline reads faithfulness 3.40</text>
+  <text x="112" y="310" fill="#94A3B8" font-size="12.5">Tempting story: "the constrained judge scores more strictly." Tempting, and wrong.</text>
+
+  <!-- 5 -->
+  <circle cx="80" cy="346" r="9" fill="#0F172A" stroke="#FBBF24" stroke-width="2"/>
+  <text x="112" y="342" fill="#E2E8F0" font-size="14.5" font-weight="600">Read the reasoning, not the score</text>
+  <text x="112" y="362" fill="#94A3B8" font-size="12.5">The judge was reasoning about the expected answer. score_faithfulness passed the wrong variable.</text>
+
+  <!-- 6 -->
+  <circle cx="80" cy="398" r="9" fill="#34D399"/>
+  <text x="112" y="394" fill="#E2E8F0" font-size="14.5" font-weight="600">One-word fix; faithfulness back to 4.95</text>
+  <text x="112" y="414" fill="#94A3B8" font-size="12.5">generated_answer, not expected_answer. The corrected run is the real baseline.</text>
+</svg>
