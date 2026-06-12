@@ -1,20 +1,28 @@
-baseURL = "https://jackmonte.com"
+baseURL = "https://jackmonte.com/"
 title = "Jack Monte — AI Engineer"
 theme = "PaperMod"
 locale = 'en-us'
-paginate = 10
 enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
 
 [params]
   author = "Jack Monte"
-  description = "AI engineer building RAG pipelines and LLM-powered tools."
+  description = "Production LLM & RAG systems for B2B SaaS and logistics."
+  images = ["images/og-image.png"]
+  mainSections = ["posts"]
   ShowReadingTime = true
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
 
+[params.homeInfoParams]
+  Title = "Jack Monte"
+  Content = "AI Engineer. Production LLM & RAG systems for B2B SaaS and logistics."
+
 [params.profileMode]
-  enabled = true
+  enabled = false
   title = "Jack Monte"
   subtitle = "AI engineer. Building RAG pipelines and LLM-powered tools."
   imageUrl = ""
@@ -33,3 +41,13 @@ enableRobotsTXT = true
     name = "Posts"
     url = "/posts/"
     weight = 1
+
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 2
+
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3
