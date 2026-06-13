@@ -52,7 +52,7 @@ The work all completed, the scores were all correct, but the *run*, the unit I a
 The fix was one argument, `max_concurrency=3`, which trades a little speed for far fewer simultaneous writes. The retry produced one clean forty-item row.
 
 
-![The experiments view after the fix: two clean forty-item runs, zero errors each, side by side](/images/p3-runs-table-2.png)
+![The experiments view after the fix: two clean forty-item runs, zero errors each, side by side](/images/p3-runs-table.png)
 
 That second one is worth sitting with. A tool that silently splits your run into two on a transient network blip is a tool you have to watch, not one you can trust blindly. The error count said zero. The run was still wrong.
 
