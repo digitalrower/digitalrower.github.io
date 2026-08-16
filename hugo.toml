@@ -1,5 +1,5 @@
 baseURL = "https://jackmonte.com/"
-title = "Jack Monte — AI Engineer"
+title = "Jack Monte, AI Engineer"
 theme = "PaperMod"
 locale = 'en-us'
 enableRobotsTXT = true
@@ -33,8 +33,8 @@ enableRobotsTXT = true
   url = "https://github.com/digitalrower"
 
 [[params.socialIcons]]
-  name = "linkedin"
-  url = "https://www.linkedin.com/in/jack-monte/"
+  name = "x"
+  url = "https://x.com/jackmontedev"
 
 [menu]
   [[menu.main]]
